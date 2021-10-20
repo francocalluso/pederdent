@@ -4,11 +4,103 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PederDent</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;1,100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>PEDERNERA DENTAL</title>
 </head>
-<body>
-    <h1>PEDERDENT</h1>
-    <h2>Sacá tu turno</h2>
+<body class="body-turnos">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-blue">
+        <a class="navbar-brand" href="#">
+            <img src="assets/dent.png" alt="logo muela" class="logo">
+            <h1 class="navbar-dark tituloNav">PEDERNERA DENTAL</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">¿Quiénes somos?</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Sacá tu turno</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Tratamientos</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <section class="turnos">
+          <div class="container py-5">
+              <div class="row">
+                  <div class="col-lg-6 ml-1">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                 <div class="col-lg-12">
+                                     <div class="head text-center text-white">
+                                         <h3 class="card-title ">Sacá tu turno</h3>
+                                     </div>
+                                 </div> 
+                              </div>
+                              <div class="form py-3">
+                                  <div class="form-row my-3">
+                                      <div class="col-lg-6">
+                                          <input type="text" class="effect-1" placeholder="Nombre del paciente">
+                                          <span class="focus-border"></span>
+                                      </div>
+                                      <div class="col-lg-6">
+                                        <input type="text" class="effect-1" placeholder="Apellido del paciente">
+                                        <span class="focus-border"></span>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="col-lg-12">
+                                        <input type="text" class="effect-1" placeholder="Teléfono de contacto">
+                                        <span class="focus-border"></span>
+                                      </div>
+                                                      
+                                    </div>
+                                    <div class="form-row pt-4">
+                                      <div class="col-lg-12">
+                                        <input type="text" class="effect-1" placeholder="Tipo de turno">
+                                        <span class="focus-border"></span>       
+                                      </div>
+                                    </div>
+                                    <div class="form-row pt-4">
+                                        <div class="col-lg-12">
+                                          <input type="text" class="effect-1" placeholder="Fecha y Hora del turno">
+                                          <span class="focus-border"></span>       
+                                        </div>
+                                      </div>
+                                    <div class="form-row pt-4">
+                                        <div class="col-lg-6">
+                                            <p><input type="checkbox">  Soy socio de OSDE</p>
+                                        </div>
+                                        <div class="offset-2 col-lg-4">
+                                            <button class="btn1"> SACAR TURNO</button>
+                                        </div>
+                                    </div> 
+
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+   
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
