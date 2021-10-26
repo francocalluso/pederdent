@@ -37,7 +37,7 @@
       <section class="turnos">
           <div class="container py-5">
               <div class="row">
-                  <div class="col-lg-6 ml-1">
+                  <div class="col-lg-6 ml-1 ">
                       <div class="card">
                           <div class="card-body">
                               <div class="row">
@@ -67,13 +67,26 @@
                                     </div>
                                     <div class="form-row pt-4">
                                       <div class="col-lg-12">
-                                        <input type="text" class="effect-1" placeholder="Tipo de turno">
+                                        <select name="tipoDeTurno" class="effect-1" placeholder="Tipo de turno">
+                                          <option value="1">Consulta de primera vez</option>
+                                          <option value="2">Control de aparatología fija</option>
+                                          <option value="3">Control de aparatología móvil</option>
+                                          <option value="4">Toma de moldes</option>
+                                          <option value="5">Cementado</option>
+                                          <option value="6">Retiro de aparatología fija</option>
+                                        </select>
                                         <span class="focus-border"></span>       
                                       </div>
                                     </div>
                                     <div class="form-row pt-4">
                                         <div class="col-lg-12">
-                                          <input type="text" class="effect-1" placeholder="Fecha y Hora del turno">
+                                          <input type="date" class="effect-1" placeholder="Fecha">
+                                          <span class="focus-border"></span>       
+                                        </div>
+                                      </div>
+                                      <div class="form-row pt-4">
+                                        <div class="col-lg-12">
+                                          <input type="time" class="effect-1" placeholder="Hora del turno">
                                           <span class="focus-border"></span>       
                                         </div>
                                       </div>
@@ -93,6 +106,17 @@
                       </div>
                   </div>
               </div>
+                <div class="row"
+                  <div class="col-lg-6">
+                    <article id="listaPacientesIngresados">
+                    </article>
+                  
+                  </div>
+                </div>
+              
+            
+
+
           </div>
       </section>
 
