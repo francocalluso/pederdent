@@ -1,49 +1,71 @@
 
-
+// CONSTRUCTOR DE PACIENTES
 class pacientes {
-    constructor (apellido, nombre, telefono, tipoDeTurno, osde) {
+    constructor (apellido, nombre, telefono, tipoDeTurno, fecha, hora, osde) {
         this.apellido = apellido.toUpperCase();
         this.nombre = nombre.toUpperCase();
-        this.telefono = telefono;
+        this.telefono = parseInt(telefono);
         this.tipoDeTurno = tipoDeTurno;
+        this.fecha = fecha;
+        this.hora = hora;
         this.osde = osde;
     }
 }
 
-const paciente1 = new pacientes("Calluso", "Franco", 1140247245, 4, true);
-const paciente2 = new pacientes("Ochoa", "Ramiro", 1123552423, 2, true);
-const paciente3 = new pacientes("Guggiera", "Sofia", 1193824283, 4, true);
-
-let apellidoPaciente = prompt("Ingrese el Apellido del paciente").toUpperCase();
-let nombrePaciente = prompt("Ingrese el nombre del paciente").toUpperCase();
-let numeroTelefonico = parseInt(prompt("Escribe tu numero de teléfono. Lo usaremos para confirmar tu turno."));
-let tipoDeTurno = prompt("Selecciona el tipo de turno. \n 1- Consulta 1era vez \n 2- Control de aparatología fija \n 3- Control de aparatología móvil \n 4- Toma de moldes \n 5- Cementado \n 6- Retiro de aparatología");
-let osde = prompt("¿Tienes Osde?").toUpperCase();
-let osdeMap = {"SI":true,"NO":false};
-
-
-const paciente4 = new pacientes(apellidoPaciente, nombrePaciente, numeroTelefonico, tipoDeTurno, osdeMap[osde]);
-
-
 const listaPacientes = [];
-listaPacientes.push(paciente1);
-listaPacientes.push(paciente2);
-listaPacientes.push(paciente3);
-listaPacientes.push(paciente4);
 
-listaPacientes.sort ((p1, p2)=> {
-    if (p1.apellido < p2.apellido) {
-        return -1;
-    } else if (p1.nombre > p2.nombre){
-        return 1;
-    } else {
-        return 0;
+
+//CARGA DE PACIENTES NUEVOS EN EL INPUT
+
+function cargarPaciente () {
+    let apellido = document.getElementById("inApell").value;
+    let nombre = document.getElementById("inNom").value;
+    let telefono = document.getElementById("inTel").value;
+    let tipoDeTurno = document.getElementById("inTDT").value;
+    let fecha = document.getElementById("inFecha").value;
+    let hora = document.getElementById("inHora").value;
+    let osde = document.getElementById("inOsde").value;
+    const paciente = new pacientes(apellido,nombre,telefono,tipoDeTurno,fecha,hora,osde);
+    listaPacientes.push(paciente);
+}
+
+
+//VALIDACIÓN QUE HABILITA EL BOTÓN PARA SACAR TURNO 
+//CUANDO LOS CAMPOS ESTÁN COMPLETADOS
+
+function validarDatos() {
+
+    if ((document.getElementById("inApell").value != "") 
+        && (document.getElementById("inNom").value != "") 
+        && (document.getElementById("inTel").value != "")
+        && (document.getElementById("inFecha").value != "")
+        && (document.getElementById("inHora").value != "")){
+        document.getElementById("sacarTurno").disabled = false;
+    }else {
+        document.getElementById("sacarTurno").disabled = true;
     }
-});
+
+}
+
+//EVENTO INPUT QUE ACTIVA LA VALIDACIÓN
+document.getElementById("inApell").addEventListener("input", validarDatos);
+document.getElementById("inNom").addEventListener("input", validarDatos);
+document.getElementById("inTel").addEventListener("input", validarDatos);
+document.getElementById("inFecha").addEventListener("input", validarDatos);
+document.getElementById("inHora").addEventListener("input", validarDatos); 
+
+document.getElementById("sacarTurno").addEventListener("click", cargarPaciente);
+
+
 console.log(listaPacientes);
 
+
+//DOM TARJETA DE TURNO SACADO
+
+function mostrarTurno() {
+
 let tituloLista = document.createElement("h2");
-tituloLista.innerHTML= `LISTA DE PACIENTES INGRESADOS`
+tituloLista.innerHTML= `Turno registrado con éxito`
 document.getElementById("listaPacientesIngresados").appendChild(tituloLista);
 
 for (const paciente of listaPacientes) {
@@ -52,8 +74,18 @@ for (const paciente of listaPacientes) {
                             <h3> Apellido: ${paciente.apellido}  <br>  Nombre: ${paciente.nombre}</h3>
                             <p> Teléfono: ${paciente.telefono}<br>
                             Tipo de turno: ${paciente.tipoDeTurno}<br>
-                             OSDE: ${paciente.osde}</p>`;
+                             Día: ${paciente.fecha}<br>
+                             Hora:${paciente.hora}</p> <br>
+                             <button class="btn2" id="cancelar"> CANCELAR TURNO</button>
+                             <button class="btn3" id="sacarOtro"> SACAR OTRO TURNO</button>
+                             <a href=""><img src="assets/descarga.png" class="imgTarjeta"></a>
+                             <a href=""><img src="assets/mail.png" class="imgTarjeta"></a>`;
     
-    document.getElementById("listaPacientesIngresados").appendChild(contenedor)
+    document.getElementById("listaPacientesIngresados").appendChild(contenedor);
+    }
 }
+
+document.getElementById("sacarTurno").addEventListener("click", mostrarTurno);
+
+
 

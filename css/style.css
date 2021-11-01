@@ -108,20 +108,62 @@
   transition: 0.4s;
 }
 
-h2 {
-  padding: 16px;
+.btn2 {
+  background-color: rgb(203, 60, 60);
+  color: rgb(0, 0, 0);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 145px;
+  margin-left: 2em;
+  margin-bottom: 2em;
+}
+.btn2:hover {
+  background-color: rgb(230, 170, 170);
+  transition: 0.4s;
+}
+
+.btn3 {
+  background-color: rgb(74, 114, 114);
+  color: rgb(255, 255, 255);
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
-  color: white;
-  margin-left: 1.5em;
-  font-size: 25px;
+  font-size: 13px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  width: 145px;
+  margin-left: 2em;
+  margin-bottom: 2em;
+}
+.btn3:hover {
+  background-color: cadetblue;
+  transition: 0.4s;
+}
+
+.btn1:disabled {
+  background: #7c7c7c;
+}
+
+h2 {
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  color: rgb(255, 255, 255);
+  margin-left: 0.5em;
+  font-size: 20px;
   text-transform: uppercase;
   background: linear-gradient(
     90deg,
-    rgba(104, 117, 121, 1) 0%,
-    rgba(86, 98, 102, 1) 30%
+    rgb(100, 191, 103) 0%,
+    rgb(117, 184, 114) 30%
   );
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 #listaPacientesIngresados h3 {
@@ -135,10 +177,16 @@ h2 {
   padding: 0 30px 30px 30px;
 }
 #listaPacientesIngresados div {
-  margin: 3em;
+  margin: 1em;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: rgb(255, 255, 255);
   box-shadow: 10px 10px 21px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 10px 10px 21px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 21px -2px rgba(0, 0, 0, 0.75);
+}
+
+.imgTarjeta {
+  margin-left: 1em;
+  height: 40px;
+  width: 40px;
 }
