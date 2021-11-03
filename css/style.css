@@ -110,9 +110,9 @@
 
 .btn2 {
   background-color: rgb(203, 60, 60);
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-family: "Montserrat", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 13px;
   outline: none;
   border: none;
@@ -123,27 +123,8 @@
   margin-bottom: 2em;
 }
 .btn2:hover {
-  background-color: rgb(230, 170, 170);
-  transition: 0.4s;
-}
-
-.btn3 {
-  background-color: rgb(74, 114, 114);
-  color: rgb(255, 255, 255);
-  font-family: "Montserrat", sans-serif;
-  font-weight: 200;
-  font-size: 13px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  height: 40px;
-  width: 145px;
-  margin-left: 2em;
-  margin-bottom: 2em;
-}
-.btn3:hover {
-  background-color: cadetblue;
-  transition: 0.4s;
+  background-color: rgb(160, 0, 0);
+  transition: 0.7s;
 }
 
 .btn1:disabled {

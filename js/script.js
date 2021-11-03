@@ -12,7 +12,17 @@ class pacientes {
     }
 }
 
-const listaPacientes = [];
+let listaPacientes = [];
+
+//RECUPERAR STORAGE 
+
+let storedTurno = localStorage.getItem('listaPacientesStorage');
+let storedTurnoParse = JSON.parse(storedTurno);
+
+
+if (storedTurnoParse !== null && storedTurnoParse !== undefined) {
+    listaPacientes = storedTurnoParse;
+};
 
 
 //CARGA DE PACIENTES NUEVOS EN EL INPUT
@@ -27,7 +37,11 @@ function cargarPaciente () {
     let osde = document.getElementById("inOsde").value;
     const paciente = new pacientes(apellido,nombre,telefono,tipoDeTurno,fecha,hora,osde);
     listaPacientes.push(paciente);
+    console.log(listaPacientes);
+
+    storePaciente()
 }
+
 
 
 //VALIDACIÓN QUE HABILITA EL BOTÓN PARA SACAR TURNO 
@@ -54,18 +68,24 @@ document.getElementById("inTel").addEventListener("input", validarDatos);
 document.getElementById("inFecha").addEventListener("input", validarDatos);
 document.getElementById("inHora").addEventListener("input", validarDatos); 
 
-document.getElementById("sacarTurno").addEventListener("click", cargarPaciente);
+
+//STORAGE 
+
+function storePaciente() {
+
+ localStorage.setItem("listaPacientesStorage", JSON.stringify(listaPacientes));
+        
+}
 
 
-console.log(listaPacientes);
 
 
 //DOM TARJETA DE TURNO SACADO
 
 function mostrarTurno() {
-
+    
 let tituloLista = document.createElement("h2");
-tituloLista.innerHTML= `Turno registrado con éxito`
+tituloLista.innerHTML= `¡Turno registrado!   Lista de turnos:`
 document.getElementById("listaPacientesIngresados").appendChild(tituloLista);
 
 for (const paciente of listaPacientes) {
@@ -77,15 +97,44 @@ for (const paciente of listaPacientes) {
                              Día: ${paciente.fecha}<br>
                              Hora:${paciente.hora}</p> <br>
                              <button class="btn2" id="cancelar"> CANCELAR TURNO</button>
-                             <button class="btn3" id="sacarOtro"> SACAR OTRO TURNO</button>
                              <a href=""><img src="assets/descarga.png" class="imgTarjeta"></a>
                              <a href=""><img src="assets/mail.png" class="imgTarjeta"></a>`;
     
     document.getElementById("listaPacientesIngresados").appendChild(contenedor);
+
     }
 }
 
-document.getElementById("sacarTurno").addEventListener("click", mostrarTurno);
+//FUNCIONES PARA LIMPIAR INPUTS Y RENDER UNA VEZ QUE SE CARGA UN PACIENTE 
+
+function limpiarInputs() {
+
+    document.getElementById("inApell").value = ""; 
+    document.getElementById("inNom").value = "";
+    document.getElementById("inTel").value = "";
+    document.getElementById("inFecha").value = "";
+    document.getElementById("inHora").value = "";
+    validarDatos();
+
+}
+
+function resetRender() {
+    
+    document.getElementById("listaPacientesIngresados").innerHTML = ``;
+
+    }
+
+
+//EVENTO DEL CLICKS Y SUS LLAMADAS A FUNCIONES
+
+document.getElementById("sacarTurno").addEventListener("click", function() {
+ 
+    resetRender();
+    cargarPaciente();
+    mostrarTurno();
+    limpiarInputs();
+    
+});
 
 
 
