@@ -1,7 +1,8 @@
 
 // CONSTRUCTOR DE PACIENTES
 class pacientes {
-    constructor (apellido, nombre, telefono, tipoDeTurno, fecha, hora, osde) {
+    constructor (id, apellido, nombre, telefono, tipoDeTurno, fecha, hora, osde) {
+        this.id = parseInt(id);
         this.apellido = apellido.toUpperCase();
         this.nombre = nombre.toUpperCase();
         this.telefono = parseInt(telefono);
@@ -22,12 +23,15 @@ let storedTurnoParse = JSON.parse(storedTurno);
 
 if (storedTurnoParse !== null && storedTurnoParse !== undefined) {
     listaPacientes = storedTurnoParse;
+}else{
+    resetRender();
 };
 
 
 //CARGA DE PACIENTES NUEVOS EN EL INPUT
 
 function cargarPaciente () {
+    let id = listaPacientes.length;
     let apellido = document.getElementById("inApell").value;
     let nombre = document.getElementById("inNom").value;
     let telefono = document.getElementById("inTel").value;
@@ -35,11 +39,16 @@ function cargarPaciente () {
     let fecha = document.getElementById("inFecha").value;
     let hora = document.getElementById("inHora").value;
     let osde = document.getElementById("inOsde").value;
-    const paciente = new pacientes(apellido,nombre,telefono,tipoDeTurno,fecha,hora,osde);
+    const paciente = new pacientes(id,apellido,nombre,telefono,tipoDeTurno,fecha,hora,osde);
     listaPacientes.push(paciente);
-    console.log(listaPacientes);
+
 
     storePaciente()
+    Swal.fire(
+        '',
+        'Turno Registrado',
+        'success'
+      )
 }
 
 
@@ -69,7 +78,7 @@ document.getElementById("inFecha").addEventListener("input", validarDatos);
 document.getElementById("inHora").addEventListener("input", validarDatos); 
 
 
-//STORAGE 
+// INGRESO AL STORAGE DEL PACIENTE 
 
 function storePaciente() {
 
@@ -79,30 +88,47 @@ function storePaciente() {
 
 
 
-
 //DOM TARJETA DE TURNO SACADO
 
 function mostrarTurno() {
     
-let tituloLista = document.createElement("h2");
-tituloLista.innerHTML= `¡Turno registrado!   Lista de turnos:`
-document.getElementById("listaPacientesIngresados").appendChild(tituloLista);
+    let tituloLista = document.createElement("h2");
+    tituloLista.innerHTML= `¡Turno registrado! Lista de turnos:`
+    document.getElementById("listaPacientesIngresados").appendChild(tituloLista);
 
-for (const paciente of listaPacientes) {
-    let contenedor = document.createElement("div");
-    contenedor.innerHTML = `
-                            <h3> Apellido: ${paciente.apellido}  <br>  Nombre: ${paciente.nombre}</h3>
-                            <p> Teléfono: ${paciente.telefono}<br>
-                            Tipo de turno: ${paciente.tipoDeTurno}<br>
-                             Día: ${paciente.fecha}<br>
-                             Hora:${paciente.hora}</p> <br>
-                             <button class="btn2" id="cancelar"> CANCELAR TURNO</button>
-                             <a href=""><img src="assets/descarga.png" class="imgTarjeta"></a>
-                             <a href=""><img src="assets/mail.png" class="imgTarjeta"></a>`;
-    
-    document.getElementById("listaPacientesIngresados").appendChild(contenedor);
+    for (const paciente of listaPacientes) {
+        let contenedor = document.createElement("div");
+        contenedor.innerHTML = `
+                                <h3> Apellido: ${paciente.apellido}  <br>  Nombre: ${paciente.nombre}</h3>
+                                <p> Teléfono: ${paciente.telefono}<br>
+                                Tipo de turno: ${paciente.tipoDeTurno}<br>
+                                Día: ${paciente.fecha}<br>
+                                Hora:${paciente.hora}</p> <br>
+                                <button class="btn2" id="boton${paciente.id}"> CANCELAR TURNO</button>
+                                <a href=""><img src="assets/descarga.png" class="imgTarjeta"></a>
+                                <a href=""><img src="assets/mail.png" class="imgTarjeta"></a>`;
 
+        $("#listaPacientesIngresados").append(contenedor);   
+        
+        //EVENTOS PARA CADA BOTON DE CANCELACIÓN DE TURNO 
+        //(TIENE UN BUG QUE NO TERMINO DE IDENTIFICAR POR QUÉ :( ))
+
+        $(`#boton${paciente.id}`).on('click', function(){
+            cancelarTurno(paciente);
+            resetRender();
+            mostrarTurno();
+        })
+        
     }
+}
+
+//FUNCION CANCELAR PACIENTE (BUGG DE QUE A VECES QUEDA UN SOLO PACIENTE QUE NO SE ELIMINA)
+function cancelarTurno(paciente) {
+    listaPacientes.splice(`${paciente.id}`,1)
+    if (listaPacientes == null || listaPacientes == undefined ) {
+        resetRender();
+     }
+
 }
 
 //FUNCIONES PARA LIMPIAR INPUTS Y RENDER UNA VEZ QUE SE CARGA UN PACIENTE 
@@ -125,7 +151,7 @@ function resetRender() {
     }
 
 
-//EVENTO DEL CLICKS Y SUS LLAMADAS A FUNCIONES
+//EVENTO DEL BOTON "SACAR TURNO" Y SUS LLAMADAS A FUNCIONES
 
 document.getElementById("sacarTurno").addEventListener("click", function() {
  
@@ -133,7 +159,7 @@ document.getElementById("sacarTurno").addEventListener("click", function() {
     cargarPaciente();
     mostrarTurno();
     limpiarInputs();
-    
+
 });
 
 
