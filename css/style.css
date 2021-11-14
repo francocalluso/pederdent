@@ -131,7 +131,7 @@
   background: #7c7c7c;
 }
 
-h2 {
+#hList {
   padding: 10px;
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
@@ -145,6 +145,10 @@ h2 {
     rgb(117, 184, 114) 30%
   );
   border-radius: 5px;
+}
+
+.swal2-confirm {
+  background: cadetblue !important;
 }
 
 #listaPacientesIngresados h3 {

@@ -17,14 +17,12 @@ let listaPacientes = [];
 
 //RECUPERAR STORAGE 
 
-let storedTurno = localStorage.getItem('listaPacientesStorage');
+let storedTurno = localStorage.getItem("listaPacientesStorage");
 let storedTurnoParse = JSON.parse(storedTurno);
 
 
 if (storedTurnoParse !== null && storedTurnoParse !== undefined) {
     listaPacientes = storedTurnoParse;
-}else{
-    resetRender();
 };
 
 
@@ -86,52 +84,67 @@ function storePaciente() {
         
 }
 
-
-
-//DOM TARJETA DE TURNO SACADO
+//  DOM TARJETA DE TURNO SACADO
 
 function mostrarTurno() {
     
-    let tituloLista = document.createElement("h2");
-    tituloLista.innerHTML= `¡Turno registrado! Lista de turnos:`
-    document.getElementById("listaPacientesIngresados").appendChild(tituloLista);
+    $("#listaPacientesIngresados").prepend("<h2 id='hList'>TURNOS INGRESADOS</h2>");
+    $("#hList") .fadeToggle(0000, function(){})
+                .fadeIn(3500, function(){})
+                .slideUp(2000);
+                
+
 
     for (const paciente of listaPacientes) {
         let contenedor = document.createElement("div");
         contenedor.innerHTML = `
+                                <input value="${paciente.id}" type="hidden">
                                 <h3> Apellido: ${paciente.apellido}  <br>  Nombre: ${paciente.nombre}</h3>
                                 <p> Teléfono: ${paciente.telefono}<br>
                                 Tipo de turno: ${paciente.tipoDeTurno}<br>
                                 Día: ${paciente.fecha}<br>
                                 Hora:${paciente.hora}</p> <br>
-                                <button class="btn2" id="boton${paciente.id}"> CANCELAR TURNO</button>
+                                <button class="btn2" id="botonCancelar"> CANCELAR TURNO</button>
                                 <a href=""><img src="assets/descarga.png" class="imgTarjeta"></a>
                                 <a href=""><img src="assets/mail.png" class="imgTarjeta"></a>`;
 
-        $("#listaPacientesIngresados").append(contenedor);   
-        
-        //EVENTOS PARA CADA BOTON DE CANCELACIÓN DE TURNO 
-        //(TIENE UN BUG QUE NO TERMINO DE IDENTIFICAR POR QUÉ :( ))
+        $("#listaPacientesIngresados").append(contenedor).fadeIn();         
+    
 
-        $(`#boton${paciente.id}`).on('click', function(){
-            cancelarTurno(paciente);
-            resetRender();
-            mostrarTurno();
-        })
-        
+        //  EVENTO PARA BOTON DE CANCELACIÓN DE TURNO 
+        $(".btn2").click (function (e){
+            Swal.fire({
+                title:"¿Quieres eliminar el turno?",
+                text: "No podrás revertir esta acción",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#37b0a6',
+                confirmButtonText: 'Sí, eliminalo!'
+
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    let padre = $(e.target).parent().children();
+                    console.log(padre);
+                    let idCanc = padre[0].value;
+                    console.log(idCanc);
+                    listaPacientes.splice(idCanc, 1);
+                    $(e.target).parent().slideUp("slow");
+                    storePaciente();
+                  Swal.fire({
+                    title:'Turno Cancelado',                
+                    icon:'success',
+                    confirmButtonColor:'#37b0a6'
+                  }
+                  )
+                }
+              })
+            
+        })                
     }
 }
 
-//FUNCION CANCELAR PACIENTE (BUGG DE QUE A VECES QUEDA UN SOLO PACIENTE QUE NO SE ELIMINA)
-function cancelarTurno(paciente) {
-    listaPacientes.splice(`${paciente.id}`,1)
-    if (listaPacientes == null || listaPacientes == undefined ) {
-        resetRender();
-     }
-
-}
-
-//FUNCIONES PARA LIMPIAR INPUTS Y RENDER UNA VEZ QUE SE CARGA UN PACIENTE 
+//  FUNCIONES PARA LIMPIAR INPUTS Y RENDER UNA VEZ QUE SE CARGA UN PACIENTE 
 
 function limpiarInputs() {
 
@@ -151,7 +164,7 @@ function resetRender() {
     }
 
 
-//EVENTO DEL BOTON "SACAR TURNO" Y SUS LLAMADAS A FUNCIONES
+//  EVENTO DEL BOTON "SACAR TURNO" Y SUS LLAMADAS A FUNCIONES
 
 document.getElementById("sacarTurno").addEventListener("click", function() {
  
