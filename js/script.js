@@ -1,4 +1,9 @@
 
+
+
+
+
+
 // CONSTRUCTOR DE PACIENTES
 class pacientes {
     constructor (id, apellido, nombre, telefono, tipoDeTurno, fecha, hora, osde) {
@@ -174,6 +179,31 @@ document.getElementById("sacarTurno").addEventListener("click", function() {
     limpiarInputs();
 
 });
+
+// AJAX
+function obtenerDatos(){
+    $("#listaUsuarios").prepend("<h3>LISTA DE USUARIOS REGISTRADOS</h3>");
+    const URLGET = "https://reqres.in/api/users?page=2";
+    $.get(URLGET).done(function(resultado,estado){
+        console.log("el estado que retorna es " + estado);
+        console.log(resultado.data);
+        if (estado == "success"){
+            let usuarios=resultado.data;
+            usuarios.forEach(usuario => {
+                $("#tablaUser").append("<tr><td>" +usuario.first_name+"</td><td>" +usuario.last_name+ "</td><td>"  +usuario.email+ "</td><td><img class='avatarImg' src="+usuario.avatar+"></td></tr>" )
+            }) 
+        }
+    })
+};
+
+$("#btnUsers").click(function(){
+    console.log("click registrado");
+    obtenerDatos();
+    $("#btnUsers").attr("disabled", true)
+})
+
+
+
 
 
 
