@@ -2,8 +2,6 @@
 
 
 
-
-
 // CONSTRUCTOR DE PACIENTES
 class pacientes {
     constructor (id, apellido, nombre, telefono, tipoDeTurno, fecha, hora, osde) {
@@ -109,9 +107,7 @@ function mostrarTurno() {
                                 Tipo de turno: ${paciente.tipoDeTurno}<br>
                                 Día: ${paciente.fecha}<br>
                                 Hora:${paciente.hora}</p> <br>
-                                <button class="btn2" id="botonCancelar"> CANCELAR TURNO</button>
-                                <a href=""><img src="assets/descarga.png" class="imgTarjeta"></a>
-                                <a href=""><img src="assets/mail.png" class="imgTarjeta"></a>`;
+                                <button class="btn2" id="botonCancelar"> CANCELAR TURNO</button>`;
 
         $("#listaPacientesIngresados").append(contenedor).fadeIn();         
     
@@ -181,7 +177,7 @@ document.getElementById("sacarTurno").addEventListener("click", function() {
 });
 
 // AJAX
-function obtenerDatos(){
+function obtenerDatos(){   
     $("#listaUsuarios").prepend("<h3>LISTA DE USUARIOS REGISTRADOS</h3>");
     const URLGET = "https://reqres.in/api/users?page=2";
     $.get(URLGET).done(function(resultado,estado){
@@ -193,17 +189,53 @@ function obtenerDatos(){
                 $("#tablaUser").append("<tr><td>" +usuario.first_name+"</td><td>" +usuario.last_name+ "</td><td>"  +usuario.email+ "</td><td><img class='avatarImg' src="+usuario.avatar+"></td></tr>" )
             }) 
         }
-    })
+    }) 
+    $("#btnSalirAdm").prepend("<button id='salirAdmin'class='btn1'>SALIR DEL MODO ADMINISTRADOR</button>");
+    $("#salirAdmin").click(function(){
+        $("#listaUsuarios").hide();
+        $(".turnos").show();
+    })   
 };
+obtenerDatos();
+$("#listaUsuarios").hide();
 
-$("#btnUsers").click(function(){
-    console.log("click registrado");
-    obtenerDatos();
-    $("#btnUsers").attr("disabled", true)
-})
+function mostrarDatosAdmin(){
+    $(".turnos").hide();
+    $("#listaUsuarios").show();
+}
 
 
+//ADMIN LOGIN
 
+$(".popup").hide();
+$("#adminLog").click(function(){
+    $(".popup").show();
+});
 
+$(".cerrar").click(function(){
+    $(".popup").hide();
+});
+
+    //VALIDACIÓN DE CLAVE
+    function validarAdminLog() {
+        if (document.getElementById("adminPass").value == "1234") {
+            document.getElementById("botonAdminLog").disabled = false;
+        }else{
+            document.getElementById("botonAdminLog").disabled = true;
+        }
+    };
+
+   $("#adminPass").on('input', function(){
+       validarAdminLog() }
+       );
+
+    $("#botonAdminLog").click(function(){
+        $(".popup").hide();
+        mostrarDatosAdmin();
+        
+    })
+   
+
+  
 
 

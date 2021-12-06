@@ -176,15 +176,66 @@
   width: 40px;
 }
 
+/* login administrador */
+
+.popup {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.popup-content {
+  height: 250px;
+  width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 101;
+}
+
+.cerrar {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: white;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+h5 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+}
+.inputAdmin {
+  margin: 20px auto;
+  display: block;
+  width: 80%;
+}
+
 /* tablas usuarios */
 .avatarImg {
   border-radius: 50%;
   height: 100px;
   width: 100px;
 }
+
+.avatarImg:hover {
+  transition: 0.7s;
+  height: 120px;
+  width: 120px;
+}
+
 #listaUsuarios {
   font-family: "Montserrat", sans-serif;
-  margin-top: 3em;
+  margin: 1em 3em;
   background: white;
 
   border-radius: 5px;
@@ -202,6 +253,7 @@
   padding: 1em;
   border-radius: 5px;
   color: white;
+  font-size: 20px;
   background: linear-gradient(
     90deg,
     rgba(104, 117, 121, 1) 0%,
@@ -214,17 +266,6 @@
   margin-right: 0;
 }
 
-#btnUsers {
-  background-color: rgb(74, 114, 114);
-  color: white;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 200;
-  font-size: 13px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  height: auto;
-  width: 145px;
-  margin-top: 2em;
-  padding: 1em;
+#salirAdmin {
+  margin: 2em;
 }

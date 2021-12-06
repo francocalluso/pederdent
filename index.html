@@ -22,18 +22,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">¿Quiénes somos?</a>
-            </li>
+            
             <li class="nav-item active">
-              <a class="nav-link" href="#">Sacá tu turno</a>
+              <a class="nav-link" href="index.html">Sacá tu turno</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="#">Tratamientos</a>
+              <a class="nav-link" id="adminLog" href="#">🔐</a>
             </li>
           </ul>
         </div>
       </nav>
+
+<!-- POPUP DE LOG ADMIN  -->
+      <div class="popup">
+        <div class="popup-content">
+          <img src="assets/close.png" alt="cerrar" class="cerrar">
+          <h5 class="inputAdmin">🔐 INGRESE LA CLAVE DE ADMINISTRADOR</h2>
+          <input class="inputAdmin effect-1" type="password" id="adminPass" placeholder="Clave de administrador">
+          <button class="btn1 inputAdmin" id="botonAdminLog" disabled>LOG IN</button>
+        </div>
+      </div>
+
+<!-- Tarjeta de turnos -->
+
       <section class="turnos">
           <div class="container py-5">
               <div class="row">
@@ -113,25 +125,22 @@
                   </div>
               
                 </div>
-                <div class="row">
-                  <div class="col-lg-8 col-xs-12">
-                    <div>
-                      <button id="btnUsers">
-                        VER USUARIOS REGISTRADOS 🔐
-                      </button>
-                    </div>
-                    <div id="listaUsuarios" class="bg-blue">
-                      
-                      <table id="tablaUser">
-                       
 
-                      </table>
-                    </div>
-                  </div>
-                </div>
               </div>                            
           </div>
       </section>
+      <div class="row">
+        <div class="col-lg-8 col-xs-12">
+
+          <div id="listaUsuarios" class="bg-blue">
+            
+            <table id="tablaUser">
+             
+
+            </table>
+          </div>
+        </div>
+      </div>
 
    
 
